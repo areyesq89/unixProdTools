@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Terminal
 
-AKA: that thing that became famous 20 years ago with the movie "The Matrix". 
+For millenials: that thing that became famous 20 years ago with the movie "The Matrix".
 
 ![](https://wsvincent.com/assets/images/terminal-command-line-for-beginners/matrix.gif)
 
@@ -44,7 +44,7 @@ Look at this video: https://www.youtube.com/watch?v=HluANRwPyNo
 
 ## Passing parameters and arguments
 
-Typically, linux commands contain three parts the command, parameters passed via a `-` and the argument. 
+Typically, linux commands contain three parts: (1) the command, (2) parameters passed via a `-` and (3) the arguments. 
 
 ```bash
 echo -n 'Hello word!'
@@ -313,11 +313,12 @@ Note that if we use the pattern "V" for `grep`, we will also get other chromosom
 cut -f1 annotation.gtf | grep '^V$' | wc -l
 ```
 
-An alternative would be to pass the `-x` command, which instructs `grep` to return only lines where the pattern matches exactly the whole line
+An alternative would be to pass the `-x` command, which instructs `grep` to return only lines where the pattern matches exactly the whole line:
 
 ```bash
 cut -f1 annotation.gtf | grep -x 'V' | wc -l
 ```
+
 
 ## Complex tasks (assignments and for loops)
 
@@ -338,7 +339,12 @@ for x in `echo ${i}`
 Count the number of lines that each chromosome appears in the file. Hint: combine the code from the two previous slides. 
 
 ```bash
-
+i=`cut -f1 annotation.gtf | grep -v '#!' | uniq`
+for x in `echo ${i}`
+  do 
+    echo ${x} 
+	cut -f1 annotation.gtf | grep -x ${x} | wc -l
+  done
 ```
 
 ## Thank you!
