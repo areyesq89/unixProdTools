@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Terminal
 
-AKA: the thing that became famous 20 years ago with the movie "The Matrix".
+AKA: that thing that became famous 20 years ago with the movie "The Matrix". 
 
 ![](https://wsvincent.com/assets/images/terminal-command-line-for-beginners/matrix.gif)
 
