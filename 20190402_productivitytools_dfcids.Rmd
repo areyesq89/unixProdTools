@@ -303,7 +303,11 @@ How many chromosomes does the Yeast genome have?
 cut -f1 annotation.gtf | grep -v '#!' | uniq | wc -l
 ```
 
-How many times does chromosome "V" appears? Note that if we use the pattern "V" for `grep`, we will also get other chromosomes that match, including "V", "VI", "IV", and so on. To identify **only** the "V" pattern, we will need to use `^` to specify that the line starts with "V" and `$` to specify that the line finishes "V":
+## Complex tasks (cut and uniq)
+
+How many times does chromosome "V" appears? 
+
+Note that if we use the pattern "V" for `grep`, we will also get other chromosomes that match, including "V", "VI", "IV", and so on. To identify **only** the "V" pattern, we will need to use `^` to specify that the line starts with "V" and `$` to specify that the line finishes "V":
 
 ```bash
 cut -f1 annotation.gtf | grep '^V$' | wc -l
@@ -331,7 +335,7 @@ for x in `echo ${i}`
 
 ## Exercise IV (advanced)
 
-Count the number of times each chromosome appears in the file. Hint: combine the code from the two previous slides. 
+Count the number of lines that each chromosome appears in the file. Hint: combine the code from the two previous slides. 
 
 ```bash
 
