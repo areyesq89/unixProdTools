@@ -10,11 +10,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Terminal
 
+AKA: the thing that became famous 20 years ago with the movie "The Matrix".
+
 ![](https://wsvincent.com/assets/images/terminal-command-line-for-beginners/matrix.gif)
 
 ## Terminal (real life)
 
-It is a text-only interface to interact with a computer. It receives standard input from a user and provides a standard output and standard error. 
+It is a text-only interface to interact with a computer. It receives standard input from a user and results in standard output and standard error. 
 
 ```{r fig.width=5, fig.height=5,echo=FALSE}
 library(png)
@@ -36,21 +38,21 @@ echo 'Hello world!'
 
 The best way to find a command is to use Google. It is nothing to be ashamed of, programmers do it all the time. For example, if we forgot the name of the `echo` command, we could google it:
 
-- "How to write output in the linux terminal?"
+- "How to print output text in the terminal?"
 
 Look at this video: https://www.youtube.com/watch?v=HluANRwPyNo
 
 ## Passing parameters and arguments
 
-Typically, linux commands contain three parts the command, parameters passed via a "-" and the argument. 
+Typically, linux commands contain three parts the command, parameters passed via a `-` and the argument. 
 
 ```bash
 echo -n 'Hello word!'
 ```
 
-In this example, `echo` is the command, `-n` is the parameter and "Hello world" is the argument. 
+In this example, `echo` is the command, `-n` is the parameter and `'Hello world'` is the argument.
 
-## Looking for possible parameters
+## Looking for help
 
 - Option A:
 
@@ -62,13 +64,16 @@ man echo
 
 GOOGLE!!
 
-## The "tab tab tab" trick
+## The "tab tab tab" and "upper key" tricks
 
 It is actually called autocomplete. It provides all possible options to complete your commands. 
 
 ```bash
 ec
 ```
+
+If you press the upper key button, it will take you to the last command you used. Try it!
+
 
 ## "Finder" app using the terminal (I)
 
@@ -112,7 +117,7 @@ What are the meanings of `.`, `..`, and `~`?
 
 ## Wild cards (I)
 
-There are three wild cards in linux `*`, `?` and `[]`. Lets prepare a small example in our directory `Newdirectory` to understand what these wildcards do. We will use the command `touch` to create three empty text files. 
+There are three wild cards in linux: `*`, `?` and `[]`. Lets prepare a small example in our directory `Newdirectory` to understand what these wildcards do. We will use the command `touch` to create three empty text files. 
 
 ```bash
 cd ~
@@ -144,25 +149,194 @@ ls b[io]b.txt
 
 ## Copying files
 
-```
+Let's generate two directories *BNames* and *Knames*, using the `mkdir` command:
+
+```bash
 cd ~ 
 cd Newdirectory
 mkdir BNames
 mkdir KNames
+```
+
+Now we will copy all files starting with a *b* to the directory *BNames* and all the files starting with a *k* to the directory *KNames*:
+
+```bash
 cp b* BNames
 cp k* KNames
 ls -l *Names
 ```
 
-## Moving files
+## Removing files (use with caution!)
+
+I won't dare to provide code examples. The syntax is identical to the `cp` and `mv` commands. If you remove a file using the terminal, it won't go to a "Trash" directory, it will be **deleted from memory**!
 
 ```
-cd ~ 
-cd Newdirectory
-mkdir BNames
-mkdir KNames
-mv b* BNames
-mv k* KNames
-ls -l *Names
+
 ```
+
+## Writing results to a file
+
+Using the character `>`, we can direct the standard output to a file. For example, with the command below we can direct the output of `ls -l` to the file *listOfFiles.txt*
+
+```bash
+ls -l > listOfFiles.txt
+```
+
+We can see the content of text files using `cat`:
+
+```bash
+cat listOfFiles.txt 
+```
+
+## Exercise II
+
+Change directory to `Newdirectory` directory, create a new directory called `FirstExercises` and move all contents into `FirstExercises`.
+
+```
+
+```
+
+## Downloading files
+
+There are at least two ways to download files from the internet. One is using the `curl` command:
+
+```bash
+curl ftp://ftp.ensemblgenomes.org/pub/release-42/fungi/gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.42.gtf.gz > Saccharomyces_cerevisiae.R64-1-1.42.gtf.gz
+```
+
+In some linux systems, sometimes curl is not installed by default. If this is the case, we could alternatively use the command `wget`:
+
+```bash
+wget ftp://ftp.ensemblgenomes.org/pub/release-42/fungi/gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.42.gtf.gz
+```
+
+Let's simplify the name of the annotation file to `annotation.gtf.gz`:
+
+```bash
+mv Saccharomyces_cerevisiae.R64-1-1.42.gtf.gz annotation.gtf.gz
+```
+
+## Decompressing files
+
+There are several commands to decompress files (`gunzip`, `unzip`, `bzip2`). They are used depending on the compression algorithm that is typically shown in the extension of the file. Our annotation file has the termination *gz* and we will use the corresponding command (`gunzip`) to decompress our file:
+
+```bash
+gunzip annotation.gtf.gz
+```
+
+To re-compress the file, we could use the `gzip` command: 
+
+```bash
+gzip annotation.gtf
+```
+
+And to de-compress it again:
+
+```bash
+gunzip annotation.gtf.gz
+```
+
+## Exercise (III)
+
+What is the difference in disk space between the compressed and the uncompressed file?
+
+```bash
+
+```
+
+
+## Viewing large files (I)
+
+As shown before, we could use the `cat` command:
+
+```bash
+cat annotation.gtf
+```
+
+## Viewing large files (II)
+
+Maybe the `cat` command was not the best idea. Better ideas are to use commands `head`, `tail` and `less`.
+
+`head` will show the first lines of the file:
+
+```bash
+head annotation.gtf
+```
+
+`tail` will show the last lines of the file:
+
+```bash
+tail annotation.gtf
+```
+
+`less` will display part of the file, with the possibility of scrolling up and down. Use `q` to exit:
+
+```bash
+less annotation.gtf
+```
+
+## Matching words and use of pipe
+
+How many lines does the annotation file contain?
+
+```bash
+wc -l annotation.gtf
+```
+
+Let's suppose that we want to get only the lines of our annotation file containing the **Mito** word. We will use the `grep` command for this:
+
+```bash
+grep Mito annotation.gtf
+```
+
+How about counting the lines in which the **Mito** word appear? A way to solve this is to pipe (`|`) the result of the `grep` command, and input it to `wc -l`:
+
+```bash
+grep Mito annotation.gtf | wc -l
+```
+
+## Complex tasks (cut and uniq)
+
+How many chromosomes does the Yeast genome have?
+
+```bash
+cut -f1 annotation.gtf | grep -v '#!' | uniq | wc -l
+```
+
+How many times does chromosome "V" appears? Note that if we use the pattern "V" for `grep`, we will also get other chromosomes that match, including "V", "VI", "IV", and so on. To identify **only** the "V" pattern, we will need to use `^` to specify that the line starts with "V" and `$` to specify that the line finishes "V":
+
+```bash
+cut -f1 annotation.gtf | grep '^V$' | wc -l
+```
+
+An alternative would be to pass the `-x` command, which instructs `grep` to return only lines where the pattern matches exactly the whole line
+
+```bash
+cut -f1 annotation.gtf | grep -x 'V' | wc -l
+```
+
+## Complex tasks (assignments and for loops)
+
+As in every programming language, we can (1) save our results into variables and (2) use `for` loops to iterate over vectors. 
+
+The example below, store the output of the `cut` line into a variable `i`. Then will use a for loop to print each of the elements stored in `i`.
+
+```bash
+i=`cut -f1 annotation.gtf | grep -v '#!' | uniq`
+for x in `echo ${i}`
+  do 
+    echo ${x} 
+  done
+```
+
+## Exercise IV (advanced)
+
+Count the number of times each chromosome appears in the file. Hint: combine the code from the two previous slides. 
+
+```bash
+
+```
+
+## Thank you!
+
 
