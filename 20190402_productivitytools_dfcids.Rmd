@@ -1,0 +1,168 @@
+---
+title: 'Productivity tools in UNIX'
+author: "Alejandro Reyes"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Terminal
+
+![](https://wsvincent.com/assets/images/terminal-command-line-for-beginners/matrix.gif)
+
+## Terminal (real life)
+
+It is a text-only interface to interact with a computer. It receives standard input from a user and provides a standard output and standard error. 
+
+```{r fig.width=5, fig.height=5,echo=FALSE}
+library(png)
+library(grid)
+img <- readPNG("img/Stdstreams-notitle.png")
+grid.raster(img)
+```
+
+## Opening the terminal (MAC OS)
+
+- Spotlight Search
+- Type "terminal" -> Press enter
+
+```bash
+echo 'Hello world!'
+```
+
+## How to find commands?
+
+The best way to find a command is to use Google. It is nothing to be ashamed of, programmers do it all the time. For example, if we forgot the name of the `echo` command, we could google it:
+
+- "How to write output in the linux terminal?"
+
+Look at this video: https://www.youtube.com/watch?v=HluANRwPyNo
+
+## Passing parameters and arguments
+
+Typically, linux commands contain three parts the command, parameters passed via a "-" and the argument. 
+
+```bash
+echo -n 'Hello word!'
+```
+
+In this example, `echo` is the command, `-n` is the parameter and "Hello world" is the argument. 
+
+## Looking for possible parameters
+
+- Option A:
+
+```bash
+man echo
+```
+
+- Option B:
+
+GOOGLE!!
+
+## The "tab tab tab" trick
+
+It is actually called autocomplete. It provides all possible options to complete your commands. 
+
+```bash
+ec
+```
+
+## "Finder" app using the terminal (I)
+
+The print working directory command (`pwd`) returns the "current" location of the file system. By default, the terminal starts in your `home` directory. 
+
+```bash
+pwd
+```
+
+The list files (`ls`) command returns the names of all the files in the current directory:
+
+```bash
+ls
+```
+
+If we add the `-l` parameter to `ls`, it will provide a long and ordered version of `ls`.
+
+```bash
+ls -l
+```
+
+## "Finder" app using the terminal (II)
+
+As in the "Finder" app, we can create new directories (i.e. folders) using the `mkdir` command. In general, life will be easier if we avoid special characters, **including spaces**!
+
+```bash
+mkdir Newdirectory
+```
+
+We can switch between directories using the change directory (`cd`) command.
+
+```bash
+cd Newdirectory
+```
+
+## Exercise I
+
+What are the meanings of `.`, `..`, and `~`?
+
+*Hint:* Run the `ls` command giving `.`, `..` and `~` as an argument. Alternatively, replace `ls` by `cd` and then run `pwd`.
+
+## Wild cards (I)
+
+There are three wild cards in linux `*`, `?` and `[]`. Lets prepare a small example in our directory `Newdirectory` to understand what these wildcards do. We will use the command `touch` to create three empty text files. 
+
+```bash
+cd ~
+cd Newdirectory
+touch bob.txt karla.txt kim.txt bib.txt
+ls
+```
+
+## Wild cards (II)
+
+- `*` represents zero or more characters 
+
+```bash
+ls k*
+```
+
+- `?` represents a single character
+
+```bash
+ls ???.txt
+```
+
+- `[]` represents a range of characters
+
+```bash
+ls 
+ls b[io]b.txt
+```
+
+## Copying files
+
+```
+cd ~ 
+cd Newdirectory
+mkdir BNames
+mkdir KNames
+cp b* BNames
+cp k* KNames
+ls -l *Names
+```
+
+## Moving files
+
+```
+cd ~ 
+cd Newdirectory
+mkdir BNames
+mkdir KNames
+mv b* BNames
+mv k* KNames
+ls -l *Names
+```
+
