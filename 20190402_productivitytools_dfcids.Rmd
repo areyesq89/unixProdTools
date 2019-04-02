@@ -16,7 +16,7 @@ For millenials: that thing that became famous 20 years ago with the movie "The M
 
 ## Terminal (real life)
 
-It is a text-only interface to interact with a computer. It receives standard input from a user and results in standard output and standard error. 
+It is a text-only interface to interact with a computer. It receives standard input from a user and returns standard output and standard error. 
 
 ```{r fig.width=5, fig.height=5,echo=FALSE}
 library(png)
@@ -109,6 +109,8 @@ We can switch between directories using the change directory (`cd`) command.
 cd Newdirectory
 ```
 
+Note that if you run `cd` without arguments, it will take you back to your home directory.
+
 ## Exercise I
 
 What are the meanings of `.`, `..`, and `~`?
@@ -143,7 +145,6 @@ ls ???.txt
 - `[]` represents a range of characters
 
 ```bash
-ls 
 ls b[io]b.txt
 ```
 
@@ -152,8 +153,7 @@ ls b[io]b.txt
 Let's generate two directories *BNames* and *Knames*, using the `mkdir` command:
 
 ```bash
-cd ~ 
-cd Newdirectory
+cd ~/Newdirectory
 mkdir BNames
 mkdir KNames
 ```
@@ -190,7 +190,7 @@ cat listOfFiles.txt
 
 ## Exercise II
 
-Change directory to `Newdirectory` directory, create a new directory called `FirstExercises` and move all contents into `FirstExercises`.
+Change directory (`cd`) to `Newdirectory` directory, create a new directory called `FirstExercises` and move all contents into `FirstExercises`.
 
 ```
 
@@ -218,7 +218,7 @@ mv Saccharomyces_cerevisiae.R64-1-1.42.gtf.gz annotation.gtf.gz
 
 ## Decompressing files
 
-There are several commands to decompress files (`gunzip`, `unzip`, `bzip2`). They are used depending on the compression algorithm that is typically shown in the extension of the file. Our annotation file has the termination *gz* and we will use the corresponding command (`gunzip`) to decompress our file:
+There are several commands to decompress files (`gunzip`, `unzip`, `bzip2`). They are used depending on the algorithm that was used to compress the file, which is typically shown in the file extension. Our annotation file has the termination *gz* and we will use the corresponding command (`gunzip`) to decompress our file:
 
 ```bash
 gunzip annotation.gtf.gz
@@ -324,7 +324,7 @@ cut -f1 annotation.gtf | grep -x 'V' | wc -l
 
 As in every programming language, we can (1) save our results into variables and (2) use `for` loops to iterate over vectors. 
 
-The example below, store the output of the `cut` line into a variable `i`. Then will use a for loop to print each of the elements stored in `i`.
+The example below, stores the output of the `cut` line into a variable `i`. Then uses a for loop to print each elements of `i`.
 
 ```bash
 i=`cut -f1 annotation.gtf | grep -v '#!' | uniq`
@@ -339,12 +339,7 @@ for x in `echo ${i}`
 Count the number of lines that each chromosome appears in the file. Hint: combine the code from the two previous slides. 
 
 ```bash
-i=`cut -f1 annotation.gtf | grep -v '#!' | uniq`
-for x in `echo ${i}`
-  do 
-    echo ${x} 
-	cut -f1 annotation.gtf | grep -x ${x} | wc -l
-  done
+
 ```
 
 ## Thank you!
