@@ -31,7 +31,7 @@ grid.raster(img)
 - Type "terminal" -> Press enter
 
 ```bash
-echo 'Hello world!'
+echo 'Hello world'
 ```
 
 ## How to find commands?
@@ -47,7 +47,7 @@ Look at this video: https://www.youtube.com/watch?v=HluANRwPyNo
 Typically, linux commands contain three parts: (1) the command, (2) parameters passed via a `-` and (3) the arguments. 
 
 ```bash
-echo -n 'Hello word!'
+echo -n 'Hello world'
 ```
 
 In this example, `echo` is the command, `-n` is the parameter and `'Hello world'` is the argument.
@@ -166,6 +166,14 @@ cp k* KNames
 ls -l *Names
 ```
 
+## Exercise (Moving files)
+
+Using the `mv` command, move the text files that start with b to the directory BNames and the ones that start with k to the directory KNames. 
+
+```bash
+
+```
+
 ## Removing files (use with caution!)
 
 I won't dare to provide code examples. The syntax is identical to the `cp` and `mv` commands. If you remove a file using the terminal, it won't go to a "Trash" directory, it will be **deleted from memory**!
@@ -190,7 +198,7 @@ cat listOfFiles.txt
 
 ## Exercise II
 
-Change directory to `Newdirectory` directory, create a new directory called `FirstExercises` and move all contents into `FirstExercises`.
+Change directory to `Newdirectory` directory, create a new directory called `FirstExercises` and move all contents of `Newdirectory` into `FirstExercises`.
 
 ```
 
@@ -324,7 +332,7 @@ cut -f1 annotation.gtf | grep -x 'V' | wc -l
 
 As in every programming language, we can (1) save our results into variables and (2) use `for` loops to iterate over vectors. 
 
-The example below, store the output of the `cut` line into a variable `i`. Then will use a for loop to print each of the elements stored in `i`.
+The example below, stores the output of the `cut` line into a variable `i`. Then uses a for loop to print each of the elements stored in `i`.
 
 ```bash
 i=`cut -f1 annotation.gtf | grep -v '#!' | uniq`
